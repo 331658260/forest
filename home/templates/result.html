@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>影像库</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/new_index.css">
+    <style>
+    .file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    font-size: 1.2vw;
+    line-height: 40PX;
+    left: -5px;
+    width: 122px;
+    text-align: center;
+    margin-right: 100px;
+    margin-left: 40px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+    #preview {
+    max-width: 50%;
+    max-height:20%;
+    display: block;
+  }
+    </style>
+</head>
+
+
+<body>
+    <div class="main">
+        <div class="nav">预测结果</div>
+        <div class="nav_btn">
+            <div class="btn_left">
+                <button style="font-size: 1.2vw;line-height: 40PX;left: -5px;width: 122px;text-align: center;" onclick="window.location.href='http://127.0.0.1:5000/数据查询统计分析模块/模型预测'">返回</button>
+            </div>
+        </div>
+
+        <div class="content" style="display: block">
+            <div class="baseBox baseBox4" style="margin:20px;height:85%;;width: 40%;margin-left: 7%;margin-top:5% ">
+                <img src="../static/img/right2.png" class="first_border" alt="">
+                <div class="boxTitle2" style="font-size: 40px;margin-top: 7.8%">原图</div>
+                <img src="{{ url_for('static', filename='uploads/img.png') }}"  style="height: 600px;width: 600px;margin-left: 9%;"> 
+            </div>           
+            <div class="baseBox baseBox4" style="margin:20px;height:85%;;width: 40%;margin-left: 5%;margin-top:5% ">
+                <img src="../static/img/right2.png" class="first_border" alt="">
+                <div class="boxTitle2" style="font-size: 40px;margin-top: 7.8%">预测结果</div>
+                <img src="{{ url_for('static', filename='output/output.png') }}" alt="Segmentation Result" style="height: 600px;width: 600px;margin-left: 9%;">    
+            </div>      
+            
+        </div>
+</body>
+<script src="../static/js/jquery.min.js" charset="utf-8"></script>
+
+
+</html>

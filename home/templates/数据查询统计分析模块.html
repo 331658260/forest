@@ -1,0 +1,240 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据查询统计分析模块</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/new_index.css">
+    <link rel="stylesheet" href="../static/css/predict.css">
+    <link rel="stylesheet" href="../static/css/chageimg.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="nav">数据查询统计分析</div>
+        <div class="nav_btn">
+            <div class="btn_left">
+                <a href="http://127.0.0.1:5000/桉树林管理服务平台">
+                <div class="button" style="font-size: 1.2vw;line-height: 40PX;margin-left:10px;">主页</div>    
+                </a>
+                <a href="http://127.0.0.1:5000/数据查询统计分析模块/图片数据库">
+                  <div class="button" style="font-size: 1.2vw;line-height: 40PX;margin-left:10px;">影像库</div>    
+                </a>
+                <a href="http://127.0.0.1:5000/数据查询统计分析模块/模型预测">
+                  <div class="button" style="font-size: 1.2vw;line-height: 40PX;margin-left:10px;">模型预测</div>    
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- 左侧 -->
+            <div class="baseBox baseBox4" style="margin:20px;height:400px;width: 45%;margin-left: 4%; margin-top:55px ">
+                <img src="../static/img/right2.png" class="first_border" alt="" >
+                <div class="boxTitle2" style="font-size: 20px;margin-top: 3.5%;">遥感图像数据展示</div>
+                <div id="max">
+                    <div class="re"  >
+                        <ul>
+                            <li><img src="../static/img2/anshu1.jpg" alt=""></li>
+                            <li><img src="../static/img2/anshu2.jpg" alt=""></li>
+                            <li><img src="../static/img2/anshu3.jpg" alt=""></li>
+                            <li><img src="../static/img2/anshu4.jpg" alt=""></li>
+                            <li><img src="../static/img2/anshu5.jpg" alt=""></li>
+                        </ul>
+                        <ol >
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>           
+            
+            <div class="baseBox baseBox3" style="margin:20px;height:400px;width: 45%;margin-top:55px ">
+                <img src="../static/img/right2.png" class="first_border" alt="">
+                <div class="boxTitle2" style="font-size: 20px;margin-top: 3.5%;">AI模型预测示例</div>
+                <div class="banner" styel="height:100%">
+                    <!-- 初始页面图片 -->
+                    <img id="img" src="../static/img2/anshu_img.png"  alt=""  style="width: 80%;height: 250px;">
+                    <div>
+                        <!-- 按钮名称一 -->
+                        <button id="btn0" style="width: 20%;height: 30px;margin-left: 45px;margin-top: 53%;"> 原图 </button>
+                        <!-- 按钮名称二 --> 
+                        <button id="btn1" style="width: 20%;height: 30px;margin-top: 53%;"> 语义分割 </button>
+                        <!-- 按钮名称三 --> 
+                        <button id="btn2" style="width: 20%;height: 30px;margin-top: 53%;"> 目标检测 </button>
+                    </div>
+                    <!-- 进度条设置 --> 
+                    <div class="progress-bar" id="progress-bar" style="top: 2%;"></div>
+                </div>
+            </div>
+
+            <!-- 右侧 -->
+            <div class="baseBox baseBox1" style="margin:20px;height:400px;width: 45%;margin-left:4%; ">
+                <img src="../static/img/right2.png" class="hardware" alt="">
+                <div class="boxTitle2" style="font-size: 20px;margin-top: 3.5%">AI模型库</div>
+                <div class="irrigate_data" id="chart0" style="width: 100%;height: 100%"></div>
+            </div>
+
+            <div class="baseBox baseBox2" style="margin:20px;height:400px;width: 45%; ">
+                <img src="../static/img/right2.png" alt="">
+                <div class="boxTitle2" style="font-size: 20px;margin-top: 3.5%">数据统计</div>
+                <div class="irrigate_data" id="chart1" style="width: 100%;height: 80%"></div>
+            </div>
+      
+        </div>
+    </div>
+
+</body>
+<script src="../static/js/echarts.js" charset="utf-8"></script>
+<script src="../static/js/jquery.min.js" charset="utf-8"></script>
+<script src="../static/js/dataScoll.js"></script>
+<script src="../static/js/chageimg.js" charset="utf-8"></script>
+<script src="../static/js/predict.js"></script>
+
+<script>
+var dom = document.getElementById('chart0');
+        var myChart = echarts.init(dom, null, {
+          renderer: 'canvas',
+          useDirtyRect: false
+        });
+        var app = {};
+        var option;
+        var chart_data1 = JSON.parse('{{ chart_data1 | tojson | escape | safe }}'),
+        option = {
+      grid: { 
+      containLabel: true,
+      height:'68%',
+      top:'2%',
+      left:'5%'
+       },
+      xAxis: {
+      name: '得分情况',
+      type: 'value', min: 50, max: 100, 
+      axisLine: {
+        lineStyle: {
+          color: '#0efcff'
+        }
+      },
+      },
+      yAxis: {
+        type: 'category',
+        axisLine: {
+        lineStyle: {
+          color: '#0efcff',
+          }
+        },text:'100px',
+        data: chart_data1.map(item => item.model)
+      },
+      visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        top:'72%',
+        min: 50,
+        max: 100,
+        text: ['高性能', '低性能'],
+        textStyle:{
+          color:'#0efcff'
+        },
+        // Map the score column to color
+        dimension: 0,
+        inRange: {
+          color: ['rgba(20,200,212,0)', 'rgba(20,200,212,0.7)', 'rgba(20,200,212,1)']
+        }
+      },
+      series: [
+        {
+          type: 'bar',
+          data: chart_data1.map(item => item.score),
+          
+        },
+      ]
+    };
+    
+        if (option && typeof option === 'object') {
+          myChart.setOption(option);
+        }
+    
+        window.addEventListener('resize', myChart.resize);
+</script>
+
+<script>
+    var dom = document.getElementById('chart1');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+    grid: { 
+      containLabel: true,
+      height:'90%',
+      top:'5%',
+      left:'8%'
+       },
+    xAxis: {
+        type: 'category',
+        data: ['总数据量', '可用数据量', '训练数据', '验证数据','无效数据量'],
+        axisLine: {
+            lineStyle: {
+            color: '#0efcff'
+            }
+        },
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            lineStyle: {
+            color: '#0efcff'
+            }
+        },
+    },
+    series: [
+        {
+        data: [2737, 2435, 1948, 487, 202],
+        label: {
+        show: true,
+        position: 'top',
+        valueAnimation: true,
+        color: '#0efcff'
+        }, 
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+            color: 'rgba(180, 180, 180, 0.2)'
+        },
+        itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: 'rgba(224,255,255,0.7)' },
+                { offset: 0.5, color: 'rgba(20,200,212,0.7)' },
+                { offset: 1, color: 'rgba(20,200,212,0.7)' }
+            ])
+        },
+        emphasis: {
+            itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: 'rgba(20,200,212)' },
+                { offset: 0.7, color: 'rgba(20,200,212)' },
+                { offset: 1, color: 'rgba(224,255,255)' }
+            ])
+            }
+        },
+        }
+    ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+
+</script>
+</html>

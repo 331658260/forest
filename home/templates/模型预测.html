@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>影像库</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/new_index.css">
+    <style>
+    .file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    font-size: 1.2vw;
+    line-height: 40PX;
+    left: -5px;
+    width: 122px;
+    text-align: center;
+    margin-right: 100px;
+    margin-left: 40px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+    #preview {
+    max-width: 50%;
+    max-height:20%;
+    display: block;
+  }
+    </style>
+</head>
+
+
+<body>
+    <div class="main">
+        <div class="nav">模型预测</div>
+        <div class="nav_btn">
+            <div class="btn_left">
+                <button style="font-size: 1.2vw;line-height: 40PX;left: -5px;width: 122px;text-align: center;" onclick="window.location.href='http://127.0.0.1:5000/数据查询统计分析模块'">返回</button>
+                <button style="font-size: 1.2vw;line-height: 40PX;left: 6px;text-align: center;" onclick="window.location.href='http://127.0.0.1:5000/数据查询统计分析模块/图片数据库'">影像库</button>
+                <button class="active" style="font-size: 1.2vw;line-height: 40PX;left: 18px;width: 122px;text-align: center;" onclick="window.location.href='http://127.0.0.1:5000/数据查询统计分析模块/模型预测'">模型预测</button>
+            </div>
+            <div class="btn_right">
+              <form method="post" enctype="multipart/form-data" action="/predict">
+
+                <a href="javascript:;" class="file" >选择图片
+                <input type="file" name="image" id="" onchange="previewImage(event)" accept="image/*"  required>
+                </a>
+    
+                <a href="javascript:;" class="file" >预测
+                  <input type="submit" value="Predict">
+                </a>
+    
+              </form>
+            </div>
+        </div>
+
+        <div class="content" style="display: block">
+          <div class="baseBox baseBox1" style="margin:20px;height:95%;width: 60%;margin-left:20%;margin-top: 2%; ">
+            <img src="../static/img/right2.png" class="hardware" alt="">
+            <div class="boxTitle2" style="font-size: 60px;margin-top: 5.7%">已选择图片</div>
+            <div id="result" style="margin-left: 20%;">
+              <div id="preview" > 
+                <img id="selected-image" src="../static/uploads/img.png" style="height: 700px;width: 700px;" >
+              </div>
+            </div>  
+          </div>
+        </div>
+</body>
+<script src="../static/js/jquery.min.js" charset="utf-8"></script>
+<script>
+  function previewImage(event) {
+    var fileInput = event.target;
+    var preview = document.getElementById('preview');
+  
+    if (fileInput.files && fileInput.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        var img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.width =  '700px'; // 设置固定宽度
+        img.style.height = '700px'; // 设置固定高度
+        preview.innerHTML = ''; // 清空预览区域
+        preview.appendChild(img);
+      }
+  
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+</script>
+
+</html>

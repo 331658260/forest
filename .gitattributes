@@ -1,0 +1,7 @@
+*.pt filter=lfs diff=lfs merge=lfs -text
+.png filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+home/model/psp_model.pt filter=lfs diff=lfs merge=lfs -text
+home/static/img2/output.png filter=lfs diff=lfs merge=lfs -text
+psp_model.pt filter=lfs diff=lfs merge=lfs -text
+output.png filter=lfs diff=lfs merge=lfs -text

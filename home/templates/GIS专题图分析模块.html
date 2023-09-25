@@ -1,0 +1,44 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GIS专题图分析模块</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/new_index.css">
+    <link rel="stylesheet" href="../static/css/gis.css">
+    <script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&tk=04cc3bc3fd00c0fc85a23c3bab19d479"></script>
+    <script type="text/javascript" src="http://lbs.tianditu.gov.cn/api/js4.0/opensource/openlibrary/ImageOverlay.js"></script>
+</head>
+
+
+<body  onLoad="onLoad()">
+    <div class="main">
+        <div class="nav">GIS专题图分析</div>
+        <div class="nav_btn">
+
+            <div class="btn_left">
+                <button style="font-size: 1.2vw;line-height: 40PX;" onclick="window.location.href='http://127.0.0.1:5000/桉树林管理服务平台'">主页</button>
+                <button value="开启测距工具" onClick="lineTool.open(); " style='width: 130px;height: 50px;font-size: 20px;'>开启测距</button>
+                <button type="button" value="关闭测距工具" onClick="lineTool.close();" style='width: 130px;height: 50px;font-size: 20px;'>关闭测距</button>
+            </div>
+            <div class="btn_right">
+                <input type="text" id="lnglatStr" value="" style='width: 430px;height: 50px;font-size: 20px;text-align: center;margin-left: 20px;font-size: 30px;background-color:rgb(175, 216, 242)'/>
+            </div>
+        </div>
+
+        <div class="content" style="display: block;">
+            <div id="gis" style="height: 100%;width: 100%;"></div>
+        </div>
+    </div>
+
+</body>
+<script src="../static/js/echarts.js" charset="utf-8"></script>
+<script src="../static/js/jquery.min.js" charset="utf-8"></script>
+<script src="../static/js/echarts-gl.js" charset="utf-8"></script>
+<script src="../static/js/dataScoll.js"></script>
+<script src="../static/js/gis.js"></script>
+</html>

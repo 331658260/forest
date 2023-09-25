@@ -1,0 +1,60 @@
+body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+#mapDiv{height:100%;width:100%;}
+input,p { margin-left: 5px; font-size: 14px;  }
+.custom-info-window {
+    width: 300px;
+    height: 200px;
+}
+.custom-info-window img {
+    width: 100%;
+    height: 150px;
+}
+.custom-info-window-content {
+    padding: 10px;
+}
+
+
+.search {
+    font-size: 13px;
+    border: 1px solid #999999;
+}
+
+.ls {
+    line-height: 27px;
+    padding-left: 7px;
+}
+
+.prompt {
+    display: none;
+    font-size: 13px;
+    border: 1px solid #999999;
+}
+
+.statistics {
+    display: none;
+    font-size: 13px;
+    border: 1px solid #999999;
+    overflow-y: scroll;
+    height: 150px;
+}
+
+.suggests {
+    display: none;
+    font-size: 13px;
+    border: 1px solid #999999;
+}
+
+;
+.lineData {
+    display: none;
+    font-size: 13px;
+    border: 1px solid #999999;
+}
+
+.result {
+    display: none;
+    font-size: 12px;
+    border: 1px solid #999999;
+    line-height: 27px;
+    padding-left: 7px;
+}
